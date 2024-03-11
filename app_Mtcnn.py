@@ -1,5 +1,9 @@
 #install mtcnn using py -m pip install mtcnn opencv-python-headless
-
+#install flask using py -m pip install flask
+#install werkzeug using py -m pip install werkzeug
+#isntall tensorflow using py -m pip install tensorflow
+#upgrade tensorflow using py -m pip install --upgrade tensorflow
+#upgrade pip using py -m pip install --upgrade pip
 
 from mtcnn import MTCNN
 import cv2 as cv
@@ -43,8 +47,8 @@ genderModel = "models/gender_net.caffemodel"
 
 MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 
-ageList = ['(0-2)', '(3-5)', '(6-9)', '(10-13)', '(14-17)', '(18-21)', '(22-25)', '(26-30)', '(31-35)', '(36-40)', '(41-45)', '(46-50)', '(51-55)', '(56-60)', '(61-)']
-
+#ageList = ['(0-2)', '(3-5)', '(6-9)', '(10-13)', '(14-17)', '(18-21)', '(22-25)', '(26-30)', '(31-35)', '(36-40)', '(41-45)', '(46-50)', '(51-55)', '(56-60)', '(61-)']
+ageList = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-)']
 genderList = ['Male', 'Female']
 
 ageNet = cv.dnn.readNet(ageModel, ageProto)
@@ -83,6 +87,8 @@ def uploader():
     if request.method == 'POST':
         f = request.files['file1']
         if f:
+            # Rename the uploaded file to 'image.jpg'
+            f.filename = 'image.jpg'
             f_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
             f.save(f_path)
             input_image = cv.imread(f_path)
