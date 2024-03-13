@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age and Gender Detection</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        img {
+            max-width: 500px;
+            max-height: 500px;
+        }
+        .output-img {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Age and Gender Detection</h2>
+        <form action="/uploader" method="post" enctype="multipart/form-data">
+            <input type="file" name="file1" accept="image/*">
+            <br><br>
+            <button type="submit">Upload Image</button>
+        </form>
+        <div class="output-img">
+            {% if output_image %}
+                <h3>Output Image</h3>
+                <img src="{{ output_image }}" alt="Output Image">
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

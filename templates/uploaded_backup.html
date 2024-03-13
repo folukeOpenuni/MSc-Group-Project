@@ -1,0 +1,83 @@
+<!-- 
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Images</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .image-container {
+            margin: 0 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 500px;
+            max-height: 500px;
+        }
+        .heading {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <h3 class="heading">Output Image with Bounding Box</h3>
+            <img src="{{ input_image }}" alt="Input Image with Bounding Box">
+            <p>Age Prediction: {{ age_pred }} (Confidence: {{ age_confidence }})</p>
+            <p>Gender Prediction: {{ gender_pred }} (Confidence: {{ gender_confidence }})</p>
+        </div>
+        
+        <div class="image-container">
+            <h3 class="heading">Output Image with Bounding Box</h3>
+            <img src="{{ output_image }}" alt="Output Image with Bounding Box">
+        </div>
+    </div>
+</body>
+</html> -->
+<!-- include functionality to input a new-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Images</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .image-container {
+            margin: 0 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 500px;
+            max-height: 500px;
+        }
+        .heading {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <h3 class="heading">Input Image</h3>
+            <img src="{{ input_image }}" alt="Input Image">
+        </div>
+        <div class="image-container">
+            <h3 class="heading">Output Image with Bounding Box</h3>
+            <img src="{{ output_image }}" alt="Output Image with Bounding Box">
+        </div>
+    </div>
+</body>
+</html>
