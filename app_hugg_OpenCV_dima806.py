@@ -12,7 +12,34 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 # Use a pipeline as a high-level helper
-pipe = pipeline("image-classification", model="dima806/faces_age_detection")
+pipe = pipeline("image-classification", model="dima806/facial_age_image_detection")
+
+# Map classes to age ranges
+class_to_age_range = {
+    '01': '01',
+    '02': '02',
+    '03': '03',
+    '04': '04',
+    '05': '05',
+    '06-07': '06-07',
+    '08-09': '08-09',
+    '10-12': '10-12',
+    '13-15': '13-15',
+    '16-20': '16-20',
+    '21-25': '21-25',
+    '26-30': '26-30',
+    '31-35': '31-35',
+    '36-40': '36-40',
+    '41-45': '41-45',
+    '46-50': '46-50',
+    '51-55': '51-55',
+    '56-60': '56-60',
+    '61-65': '61-65',
+    '66-70': '66-70',
+    '71-80': '71-80',
+    '81-90': '81-90',
+    '90+': '90+'
+}
 
 def getFaceBox(net, frame, conf_threshold=0.7):
     if frame is None:
@@ -54,19 +81,16 @@ def age_gender_detector(frame):
         # Perform age detection using the pipeline
         results = pipe(img_pil)
         
-        # Print the predicted labels and their scores
-        print(results)
-        
         # Extract the prediction
         prediction = results[0]
-        
-        # Process the prediction
-        gender = "Not implemented"  # Gender detection is not implemented in this code
-        predicted_age = prediction['label']
+        predicted_age_class = prediction['label']
         confidence = prediction['score']
         
+        # Map class to age range
+        predicted_age_range = class_to_age_range.get(predicted_age_class, 'Unknown')
+        
         # Display the prediction on the frame
-        cv.putText(frameFace, f"{predicted_age} (Conf: {confidence:.2f})", (x1, y1-10), cv.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv.LINE_AA)
+        cv.putText(frameFace, f"{predicted_age_range} (Conf: {confidence:.2f})", (x1, y1-10), cv.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv.LINE_AA)
     
     return frameFace
 
@@ -106,5 +130,3 @@ if __name__ == '__main__':
     faceNet = cv.dnn.readNet(faceModel, faceProto)
     
     app.run(debug=True)
-
-
